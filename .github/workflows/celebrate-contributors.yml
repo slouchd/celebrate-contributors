@@ -1,0 +1,41 @@
+name: Celebrate Contributors
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+  workflow_call:
+
+jobs:
+  celebrate-contributors:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Find Contributors
+        id: contributors
+        run: |
+          response=$(curl -s -X GET \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/contributors")
+          echo ::set-output name=response::"$response"
+
+      - name: Generate Contributors Table and Graph
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Contributions Table
+        run: python contributors_table.py ${{ steps.contributors.outputs.response }}
+
+      - name: Generate Contributions Graph
+        run: python contributors_graph.py ${{ steps.contributors.outputs.response }}
