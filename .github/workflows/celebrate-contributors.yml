@@ -35,4 +35,5 @@ jobs:
           git add CONTRIBUTORS.md
           git commit -m "Update contributors file"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git push --set-upstream origin celebrate-contributors-action
           git push
