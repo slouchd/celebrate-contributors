@@ -2,7 +2,7 @@ name: Celebrate Contributors
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '* * * * *'  # Runs every day at 00:00 UTC
   workflow_call:
 
 jobs:
@@ -19,7 +19,9 @@ jobs:
           response=$(curl -s -X GET \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${{ github.repository }}/contributors")
-          echo ::set-output name=response::"$response"
+      
+      - name: Set Output
+        run: echo response="$response" >> $GITHUB_OUTPUT
 
       - name: Generate Contributors Table and Graph
         uses: actions/checkout@v3
@@ -35,7 +37,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Generate Contributions Table
-        run: python contributors_table.py ${{ steps.contributors.outputs.response }}
+        run: python contributors_table.py $GITHUB_OUTPUT
 
       - name: Generate Contributions Graph
-        run: python contributors_graph.py ${{ steps.contributors.outputs.response }}
+        run: python contributors_graph.py $GITHUB_OUTPUT
