@@ -26,3 +26,12 @@ jobs:
 
       - name: Find Contributions then Generate Table and Graph
         run: python celebrate_contributors.py ${{ github.repository }} ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit Changes
+        run: |
+          git config --global user.email "no-reply@github.com"
+          git config --global user.name "GitHub Actions"
+          git add CONTRIBUTORS.md
+          git commit -m "Update contributors file"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git push
