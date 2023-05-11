@@ -38,6 +38,7 @@ jobs:
             git pull origin celebrate-contributors-action
           else 
             git checkout -b celebrate-contributors-action 
+            git pull origin celebrate-contributors-action
           fi
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
