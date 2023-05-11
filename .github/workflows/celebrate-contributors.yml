@@ -2,8 +2,8 @@ name: Celebrate Contributors
 
 on:
   schedule:
-    # - cron: '* * * * *'  # testing
-    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '* * * * *'  # testing
+    # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
   workflow_call:
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
             git checkout -b celebrate-contributors-action 
           fi
           git branch --set-upstream-to=origin/celebrate-contributors-action celebrate-contributors-action
-          git fetch --all
+          git fetch origin/celebrate-contributors-action
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
           git push --set-upstream origin celebrate-contributors-action
