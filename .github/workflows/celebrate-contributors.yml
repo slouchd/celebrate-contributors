@@ -31,14 +31,14 @@ jobs:
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull
           if git show-ref --quiet refs/heads/celebrate-contributors-action; then 
             git checkout celebrate-contributors-action
           else 
             git checkout -b celebrate-contributors-action 
           fi
-          git pull
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push --set-upstream origin celebrate-contributors-action
           git push
