@@ -36,8 +36,8 @@ jobs:
             git checkout celebrate-contributors-action
           else 
             git checkout -b celebrate-contributors-action 
-            git pull --all
           fi
+          git pull --all
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
           git push --set-upstream origin celebrate-contributors-action
