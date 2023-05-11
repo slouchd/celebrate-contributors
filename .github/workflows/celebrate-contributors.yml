@@ -2,8 +2,8 @@ name: Celebrate Contributors
 
 on:
   schedule:
-    # - cron: '* * * * *'  # testing
-    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '* * * * *'  # testing
+    # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
   workflow_call:
 
 jobs:
@@ -32,12 +32,13 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          if git show-ref --quiet refs/heads/celebrate-contributors-action; then 
+          git fetch --all
+          if git rev-parse --quiet --verify origin/celebrate-contributors-action; then 
             git checkout celebrate-contributors-action
           else 
             git checkout -b celebrate-contributors-action 
           fi
-          git pull --all
+          git pull
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
           git push --set-upstream origin celebrate-contributors-action
