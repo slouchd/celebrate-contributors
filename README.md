@@ -8,6 +8,8 @@ Created for: [DEV hackathon](https://dev.to/devteam/announcing-the-github-dev-20
 
 🧑‍💻 Usage
 ---
+To ensure the Action is able to write to the repository. You must enable write permissions in the repository settings. You can do this my navigating to Settings -> Actions -> General -> Workflow Permissions and select 'Read and write permissions'. Once saved the Action will work as intended!
+
 The Action is configured to be reusable. Please, feel free to use it in your repository!
 
 ```yaml
