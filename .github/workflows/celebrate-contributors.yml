@@ -35,10 +35,10 @@ jobs:
           git fetch --all
           if git rev-parse --quiet --verify origin/celebrate-contributors-action; then 
             git checkout celebrate-contributors-action
+            git pull origin celebrate-contributors-action
           else 
             git checkout -b celebrate-contributors-action 
           fi
-          git pull
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
           git push --set-upstream origin celebrate-contributors-action
