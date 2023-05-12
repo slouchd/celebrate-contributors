@@ -2,8 +2,8 @@ name: Celebrate Contributors
 
 on:
   schedule:
-    # - cron: '* * * * *'  # testing
-    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '* * * * *'  # testing
+    # - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
   workflow_call:
 
 jobs:
@@ -34,4 +34,4 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
-          git push --set-upstream origin celebrate-contributors-action
+          git push
