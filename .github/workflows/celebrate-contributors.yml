@@ -24,15 +24,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Prepare Branch for Changes
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git checkout -b "$(date +%Y%m%d-celebrate-contributors-action)"
+
       - name: Find Contributions then Generate Table and Graph
         run: python celebrate_contributors.py ${{ github.repository }} ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit Changes
         run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git checkout -b "$(date +%Y%m%d-celebrate-contributors-action)" 
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
           git push
