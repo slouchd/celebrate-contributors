@@ -38,6 +38,6 @@ jobs:
 
       - name: Commit Changes
         run: |
-          git add CONTRIBUTORS.md contributions_graph.png
+          git add -A
           git commit -m "Update contributors file"
-          git push --set-upstream origin 20230512-celebrate-contributors-action
+          git push --set-upstream origin "$(date +%Y%m%d-celebrate-contributors-action)"
