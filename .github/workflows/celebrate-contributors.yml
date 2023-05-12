@@ -38,4 +38,4 @@ jobs:
         run: |
           git add CONTRIBUTORS.md contributions_graph.png
           git commit -m "Update contributors file"
-          git push
+          git push --set-upstream origin 20230512-celebrate-contributors-action
