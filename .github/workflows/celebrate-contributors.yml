@@ -2,7 +2,7 @@ name: Celebrate Contributors
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at 00:00 UTC
+    - cron: '0 0 * * 1'  # Runs every Monday at 00:00 UTC
   workflow_call:
 
 jobs:
